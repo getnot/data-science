@@ -1,0 +1,49 @@
+
+for below sample model a dummy file is used . which has below mentioed columns.
+Columns=[A,B,C,D]
+with the help of A,B,C we are going to predict D.
+
+Steps to make a model :
+
+ 0. import necessary liraries :
+          import pandas as pd    // to load,cleanand manipulate data.
+          from sklearn.tree import DecisionTreeRegressor  // to train model and prediction
+          from sklearn.metrics import mean_absolute_error // to validate model result
+ 
+ 1. load data in using pandas :
+          data=pd.read_csv("/kaggle/input/mutivariabledataset/MutliListData.csv")
+          data.columns            // to see all columns of data
+          data.describe()         // to important data point of data
+          data.head()             // to see first 5 row
+ 
+ 2. seperate data in cloumn between feature and result :
+          feature=['A','B','C']
+          X=data[feature]         // feature extracted data set 
+          y=data.D                // result to predict
+ 
+ 3. then use of the prediction model and train it:
+          data_model = DecisionTreeRegressor(random_state=1)
+          /*
+            find pattern in data X based on already known result y then predict y for first 5 row of X
+          */
+          data_model.fit(X, y)
+          print(data_model.predict(X.head()))
+          
+ 4. then validate model result :
+          // error=actual−predicted.
+          predicted_D = data_model.predict(X)
+          mean_absolute_error(y, predicted_D)
+
+
+Note : Above result will always be error free 
+       as we are checking error with same data with which we have trained the model
+       so we need to always break out data between training data and validation data.
+
+Distributiob of data from training set and validation set : 
+
+train_X, val_X, train_y, val_y = train_test_split(X, y, random_state = 0)
+data_model = DecisionTreeRegressor()
+data_model.fit(train_X, train_y)
+
+val_predictions = melbourne_model.predict(val_X)
+print(mean_absolute_error(val_y, val_predictions))
