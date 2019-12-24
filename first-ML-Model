@@ -33,17 +33,3 @@ Steps to make a model :
           // error=actual−predicted.
           predicted_D = data_model.predict(X)
           mean_absolute_error(y, predicted_D)
-
-
-Note : Above result will always be error free 
-       as we are checking error with same data with which we have trained the model
-       so we need to always break out data between training data and validation data.
-
-Distributiob of data from training set and validation set : 
-
-train_X, val_X, train_y, val_y = train_test_split(X, y, random_state = 0)
-data_model = DecisionTreeRegressor()
-data_model.fit(train_X, train_y)
-
-val_predictions = melbourne_model.predict(val_X)
-print(mean_absolute_error(val_y, val_predictions))
