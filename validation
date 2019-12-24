@@ -1,0 +1,37 @@
+
+Now we have made a model in first-ML-Model.
+
+That model will always be error free  as we are checking error with same data with which we have trained the model,so we need to always break out data between training data and validation data.
+
+### Distribution of data from training set and validation set : 
+
+              train_X, val_X, train_y, val_y = train_test_split(X, y, random_state = 0)
+              data_model = DecisionTreeRegressor()
+              data_model.fit(train_X, train_y)
+
+              val_predictions = melbourne_model.predict(val_X)
+              print(mean_absolute_error(val_y, val_predictions))
+
+###  Overfitting and Underfitting
+Data is distributed in buckets based on pattern.
+
+Underfittng :  If a Data set have less pattern due to which each data bucket will have more irrelevant data then it is Underfitting .
+               => due to error mean error will be high.
+Overfitting :  If a data set have more pattern due to which each data bucket will have less data to train then it Overfitting .
+               => due to which mean  error will low but new predictions are garbage.
+
+SO Underfitting to Overfitting is continous curve and we want to be in middle of it.
+
+To get that we will try restrict number of buckets like below by providing bucket size in pattern finder:
+            
+            def get_mae(max_leaf_nodes, train_X, val_X, train_y, val_y):
+              model = DecisionTreeRegressor(max_leaf_nodes=max_leaf_nodes, random_state=0)
+              model.fit(train_X, train_y)
+              preds_val = model.predict(val_X)
+              mae = mean_absolute_error(val_y, preds_val)
+              return(mae)
+            
+            for max_leaf_nodes in [5, 50, 500, 5000]:
+             my_mae = get_mae(max_leaf_nodes, train_X, val_X, train_y, val_y)
+             print("Max leaf nodes: %d  \t\t Mean Absolute Error:  %d" %(max_leaf_nodes, my_mae))
+            
