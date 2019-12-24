@@ -12,3 +12,4 @@ No one want to learn boring concepts and others theory , so we are going to star
 step 1: validation <br />
 going to validate created model.
  
+Note : In above Model have used decision tree algorithm(DecisionTreeRegressor) but we can also a more sophisticated alogorith like random forest(RandomForestRegressor) .
